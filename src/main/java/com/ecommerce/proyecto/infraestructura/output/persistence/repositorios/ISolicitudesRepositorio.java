@@ -1,0 +1,11 @@
+package com.ecommerce.proyecto.infraestructura.output.persistence.repositorios;
+
+import com.ecommerce.proyecto.infraestructura.output.persistence.entidades.SolicitudesJpa;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.UUID;
+
+@Repository
+public interface ISolicitudesRepositorio extends JpaRepository<SolicitudesJpa, UUID> {
+}
