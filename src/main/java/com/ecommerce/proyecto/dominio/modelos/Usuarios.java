@@ -23,6 +23,6 @@ public class Usuarios {
     private LocalDate nacimiento;
     private LocalDateTime fechaRegistro;
     private String direccion;
-    private String contraseña;
+    private String contrasena;
 
 }

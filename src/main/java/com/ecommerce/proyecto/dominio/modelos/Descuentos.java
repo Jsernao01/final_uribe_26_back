@@ -18,6 +18,6 @@ public class Descuentos {
     private String razon;
     private LocalDateTime inicio;
     private LocalDateTime fin;
-    private Productos idProducto;
-    private Usuarios idCliente;
+    private Productos producto;
+    private Usuarios cliente;
 }

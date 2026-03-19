@@ -12,6 +12,6 @@ public class Stock {
     private String talla;
     private Integer cantidad;
     private String color;
-    private Productos idProducto;
+    private Productos producto;
 
 }

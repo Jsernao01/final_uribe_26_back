@@ -43,10 +43,10 @@ public class SolicitudesJpa {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cliente")
-    private UsuariosJpa idCliente;
+    private UsuariosJpa cliente;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_orden")
-    private OrdenesJpa idOrden;
+    private OrdenesJpa orden;
 
 }

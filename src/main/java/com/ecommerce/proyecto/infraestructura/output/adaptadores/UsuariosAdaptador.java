@@ -6,7 +6,9 @@ import com.ecommerce.proyecto.infraestructura.output.persistence.entidades.Usuar
 import com.ecommerce.proyecto.infraestructura.output.persistence.mapeos.UsuariosJpaMapper;
 import com.ecommerce.proyecto.infraestructura.output.persistence.repositorios.IUsuariosJpaRepositorio;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
+@Repository
 @RequiredArgsConstructor
 public class UsuariosAdaptador implements IUsuariosRepositorio {
 

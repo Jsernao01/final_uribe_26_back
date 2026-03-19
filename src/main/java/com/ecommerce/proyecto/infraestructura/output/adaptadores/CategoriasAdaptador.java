@@ -4,12 +4,13 @@ import com.ecommerce.proyecto.dominio.modelos.Categorias;
 import com.ecommerce.proyecto.dominio.repositorios.ICategoriasRepositorio;
 import com.ecommerce.proyecto.infraestructura.output.persistence.entidades.CategoriasJpa;
 import com.ecommerce.proyecto.infraestructura.output.persistence.mapeos.CategoriasJpaMapper;
-import com.ecommerce.proyecto.infraestructura.output.persistence.repositorios.ICarritoJpaRepositorio;
 import com.ecommerce.proyecto.infraestructura.output.persistence.repositorios.ICategoriasJpaRepositorio;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 @RequiredArgsConstructor
 public class CategoriasAdaptador implements ICategoriasRepositorio {
 

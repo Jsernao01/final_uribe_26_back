@@ -31,5 +31,5 @@ public class CuentasBancariasJpa {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cliente")
-    private UsuariosJpa idCliente;
+    private UsuariosJpa cliente;
 }

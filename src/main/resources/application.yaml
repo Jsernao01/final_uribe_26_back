@@ -1,6 +1,7 @@
 spring:
   application:
-    name: ecommerse
+    name: ecommerce
+
   datasource:
     url: jdbc:h2:mem:proyecto
     driver-class-name: org.h2.Driver
@@ -11,8 +12,23 @@ spring:
     hibernate:
       ddl-auto: create-drop
     show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
 
   h2:
     console:
       enabled: true
       path: /h2-console
+      settings:
+        web-allow-others: true
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  web:
+    resources:
+      add-mappings: true
+
+server:
+  servlet:
+    context-path: /

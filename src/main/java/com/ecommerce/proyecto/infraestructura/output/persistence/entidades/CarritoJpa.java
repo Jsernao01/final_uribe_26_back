@@ -30,6 +30,6 @@ public class CarritoJpa {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_producto", nullable = false)
-    private ProductosJpa idProducto;
+    private ProductosJpa producto;
 
 }

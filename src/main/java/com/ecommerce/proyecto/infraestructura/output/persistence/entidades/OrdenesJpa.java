@@ -37,10 +37,10 @@ public class OrdenesJpa {
     @OneToMany(mappedBy = "referencia")
     private List<CarritoJpa> carritos;
 
-    @OneToMany(mappedBy = "idOrden")
-    private List<SolicitudesJpa> solicitudesM;
+    @OneToMany(mappedBy = "orden")
+    private List<SolicitudesJpa> solicitudes;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cliente")
-    private UsuariosJpa idCliente;
+    private UsuariosJpa cliente;
 }

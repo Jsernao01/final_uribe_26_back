@@ -48,6 +48,6 @@ public class DescuentosJpa {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_producto", unique = true)
-    private ProductosJpa idProducto;
+    private ProductosJpa producto;
 
 }

@@ -34,15 +34,15 @@ public class ProductosJpa {
     @Column(nullable = false)
     private Boolean activo;
 
-    @OneToMany(mappedBy = "idProducto")
+    @OneToMany(mappedBy = "producto")
     private List<CarritoJpa> carritos;
 
-    @OneToMany(mappedBy = "idProducto")
+    @OneToMany(mappedBy = "producto")
     private  List<CategoriasJpa> categorias;
 
-    @OneToMany(mappedBy = "idProducto")
+    @OneToMany(mappedBy = "producto")
     private List<StockJpa> stocks;
 
-    @OneToOne(mappedBy = "idProducto")
+    @OneToOne(mappedBy = "producto")
     private DescuentosJpa descuento;
 }

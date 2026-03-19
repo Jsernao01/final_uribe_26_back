@@ -1,5 +1,8 @@
 package com.ecommerce.proyecto.dominio.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum MotivosCancelacion {
 
     ERROR_PEDIDO("error pedido"),
