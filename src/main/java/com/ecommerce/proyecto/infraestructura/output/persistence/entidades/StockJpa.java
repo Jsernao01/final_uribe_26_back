@@ -30,5 +30,5 @@ public class StockJpa {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_producto")
-    private ProductosJpa idProducto;
+    private ProductosJpa producto;
 }

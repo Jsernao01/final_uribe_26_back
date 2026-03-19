@@ -6,7 +6,9 @@ import com.ecommerce.proyecto.infraestructura.output.persistence.entidades.Produ
 import com.ecommerce.proyecto.infraestructura.output.persistence.mapeos.ProductosJpaMapper;
 import com.ecommerce.proyecto.infraestructura.output.persistence.repositorios.IProductosJpaRepositorio;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
+@Repository
 @RequiredArgsConstructor
 public class ProductosAdaptador implements IProductosRepositorio {
 

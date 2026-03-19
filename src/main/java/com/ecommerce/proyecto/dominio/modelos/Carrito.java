@@ -12,5 +12,5 @@ public class Carrito {
     private Ordenes referencia;
     private Integer precioParcial;
     private Integer cantidad;
-    private Productos idProducto;
+    private Productos producto;
 }

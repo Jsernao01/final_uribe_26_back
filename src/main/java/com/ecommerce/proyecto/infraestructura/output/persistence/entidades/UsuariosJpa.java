@@ -60,12 +60,12 @@ public class UsuariosJpa {
     @Column(nullable = false)
     private String contrasena;
 
-    @OneToMany(mappedBy = "idCliente")
+    @OneToMany(mappedBy = "cliente")
     private List<OrdenesJpa> ordenes;
 
-    @OneToMany(mappedBy = "idCliente")
+    @OneToMany(mappedBy = "cliente")
     private List<CuentasBancariasJpa> cuentasBancarias;
 
-    @OneToMany(mappedBy = "idCliente")
+    @OneToMany(mappedBy = "cliente")
     private List<SolicitudesJpa> solicitudes;
 }

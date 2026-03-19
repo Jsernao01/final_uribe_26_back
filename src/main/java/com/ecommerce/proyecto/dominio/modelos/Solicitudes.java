@@ -17,6 +17,6 @@ public class Solicitudes {
     private TiposSolicitud tipo;
     private MotivosDevolucion motivooDevolucion;
     private MotivosCancelacion motivoCancelacion;
-    private Usuarios idCliente;
-    private Ordenes idOrden;
+    private Usuarios cliente;
+    private Ordenes orden;
 }

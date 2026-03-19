@@ -14,5 +14,5 @@ public class Ordenes {
     private LocalDateTime fecha;
     private Integer precioTotal;
     private Estados estado;
-    private Usuarios idCliente;
+    private Usuarios cliente;
 }

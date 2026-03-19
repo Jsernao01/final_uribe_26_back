@@ -11,5 +11,5 @@ import java.util.UUID;
 public class Categorias {
     private UUID id;
     private Caracteristicas caracteristica;
-    private Productos idProducto;
+    private Productos producto;
 }

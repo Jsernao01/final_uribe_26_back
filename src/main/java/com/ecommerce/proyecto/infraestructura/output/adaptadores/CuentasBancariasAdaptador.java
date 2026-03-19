@@ -6,7 +6,11 @@ import com.ecommerce.proyecto.infraestructura.output.persistence.entidades.Cuent
 import com.ecommerce.proyecto.infraestructura.output.persistence.mapeos.CuentasBancariasJpaMapper;
 import com.ecommerce.proyecto.infraestructura.output.persistence.repositorios.ICuentasBancariasJpaRepositorio;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 @RequiredArgsConstructor
 public class CuentasBancariasAdaptador implements ICuentasBancariasRepositorio {
 
@@ -14,10 +18,10 @@ public class CuentasBancariasAdaptador implements ICuentasBancariasRepositorio {
     private final ICuentasBancariasJpaRepositorio cuentasBancariasRepo;
 
     @Override
-    public CuentasBancarias guardar(CuentasBancarias cuenta) {
+    public List<CuentasBancarias> guardar(List<CuentasBancarias> cuenta) {
         try{
-            CuentasBancariasJpa cuentaNueva = cuentasBancariasMapper.aEntidad(cuenta);
-            return cuentasBancariasMapper.aModelo(cuentasBancariasRepo.save(cuentaNueva));
+            List<CuentasBancariasJpa> cuentaNueva = cuentasBancariasMapper.aEntidadLista(cuenta);
+            return cuentasBancariasMapper.aModeloLista(cuentasBancariasRepo.saveAll(cuentaNueva));
         }catch (Exception e){
             throw new RuntimeException("Error al guardar una cuenta bancaria", e);
         }

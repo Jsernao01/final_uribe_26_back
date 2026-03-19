@@ -11,8 +11,8 @@ import java.util.UUID;
 public class CuentasBancarias {
     private UUID id;
     private String nombreBanco;
-    private Integer cuenta;
+    private String cuenta;
     private TiposCuentas tipoCuenta;
-    private Usuarios idCliente;
+    private Usuarios cliente;
 
 }
