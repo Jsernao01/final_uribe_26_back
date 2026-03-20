@@ -8,6 +8,8 @@ import com.ecommerce.proyecto.infraestructura.output.persistence.repositorios.IP
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Repository
 @RequiredArgsConstructor
 public class ProductosAdaptador implements IProductosRepositorio {
@@ -23,5 +25,15 @@ public class ProductosAdaptador implements IProductosRepositorio {
         }catch (Exception e){
             throw new RuntimeException("Error al guardar un producto", e);
         }
+    }
+
+    @Override
+    public Productos findByid(UUID id) {
+        try {
+            return productosMapper.aModelo(productosRepo.findById(id).orElse(null));
+        }catch (Exception e){
+            throw new RuntimeException("No se encontro ningun producto con ese id");
+        }
+
     }
 }

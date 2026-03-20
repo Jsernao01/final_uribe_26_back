@@ -19,9 +19,8 @@ import java.util.UUID;
 @Setter
 public class OrdenesJpa {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(columnDefinition = "UUID")
-    private UUID referencia;
+    @Column()
+    private String  referencia;
 
     @CreationTimestamp
     @Column(name = "fecha_registro", nullable = false)
