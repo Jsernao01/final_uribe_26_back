@@ -15,8 +15,12 @@ public interface CarritoMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "referencia", ignore = true)
     @Mapping(target = "producto", ignore = true)
+    @Mapping(target = "precioParcial", ignore = true)
     Carrito deGuardarCarrito(GuardarCarritoDto dto);
 
     List<Carrito> deGuardarCarritoList(List<GuardarCarritoDto> dto);
+
+    @Mapping(target = "referencia", source = "referencia.referencia")
+    CarritoDto deResponseCarrito(Carrito carrito);
 
 }

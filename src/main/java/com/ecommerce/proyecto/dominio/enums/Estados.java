@@ -5,6 +5,7 @@ import lombok.Getter;
 @Getter
 public enum Estados {
 
+    DECLARADA("declarada"),
     CREADA("creada"),
     ENTREGADA("entregada"),
     CANCELADA("cancelada"),

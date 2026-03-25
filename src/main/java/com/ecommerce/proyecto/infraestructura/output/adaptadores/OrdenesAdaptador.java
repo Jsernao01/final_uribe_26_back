@@ -1,5 +1,6 @@
 package com.ecommerce.proyecto.infraestructura.output.adaptadores;
 
+import com.ecommerce.proyecto.dominio.enums.Estados;
 import com.ecommerce.proyecto.dominio.modelos.Ordenes;
 import com.ecommerce.proyecto.dominio.repositorios.IOrdenesRepositorio;
 import com.ecommerce.proyecto.infraestructura.output.persistence.entidades.CarritoJpa;
@@ -8,6 +9,8 @@ import com.ecommerce.proyecto.infraestructura.output.persistence.mapeos.OrdenesJ
 import com.ecommerce.proyecto.infraestructura.output.persistence.repositorios.IOrdenesJpaRepositorio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -20,9 +23,10 @@ public class OrdenesAdaptador implements IOrdenesRepositorio {
     public Ordenes guardarOrden(Ordenes orden) {
         try{
             OrdenesJpa ordenesNuevo = ordenesMapper.aEntidad(orden);
+            ordenesNuevo.setEstado(Estados.DECLARADA);
             return ordenesMapper.aModelo(ordenesRepo.save(ordenesNuevo));
         }catch (Exception e){
-            throw new RuntimeException("Error al guardar una orden");
+            throw new RuntimeException("Error al guardar una orden: ", e);
         }
 
     }
@@ -35,5 +39,10 @@ public class OrdenesAdaptador implements IOrdenesRepositorio {
         }catch (Exception e){
             return null;
         }
+    }
+
+    @Override
+    public Optional<Ordenes> buscarUltimaReferencia() {
+        return ordenesRepo.findTopByOrderByReferenciaDesc().map(ordenesMapper::aModelo);
     }
 }

@@ -3,9 +3,11 @@ package com.ecommerce.proyecto.dominio.repositorios;
 import com.ecommerce.proyecto.dominio.modelos.Carrito;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public interface ICarritoRepositorio {
 
-    List<Carrito> guardar(List<Carrito> carrito);
+    Carrito guardar(Carrito carrito);
 
 }

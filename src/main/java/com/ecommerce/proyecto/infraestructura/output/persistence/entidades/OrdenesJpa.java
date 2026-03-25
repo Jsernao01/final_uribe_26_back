@@ -23,10 +23,10 @@ public class OrdenesJpa {
     private String  referencia;
 
     @CreationTimestamp
-    @Column(name = "fecha_registro", nullable = false)
+    @Column(name = "fecha_registro")
     private LocalDateTime fecha;
 
-    @Column(name = "precio_total", nullable = false)
+    @Column(name = "precio_total")
     private Integer precioTotal;
 
     @Enumerated(EnumType.STRING)

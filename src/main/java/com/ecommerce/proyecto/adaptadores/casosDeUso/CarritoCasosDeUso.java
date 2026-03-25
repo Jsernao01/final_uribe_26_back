@@ -14,32 +14,31 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class CarritoCasosDeUso implements CarritoPuerto {
 
+    private final CarritoMapper carritoMapper;
     private final ICarritoRepositorio carritoRepo;
-    private final IProductosRepositorio productosRepo;
     private final IOrdenesRepositorio ordenesRepo;
+    private final IProductosRepositorio productosRepo;
 
 
     @Override
-    public List<CarritoDto> guardarCarrito(List<GuardarCarritoDto> dto) {
+    public CarritoDto guardarCarrito(GuardarCarritoDto dto, UUID idCliente, String referencia) {
         try {
-            List<Carrito> carritos = dto.stream().map(e-> Carrito.builder()
-                    .referencia(ordenesRepo.findByReferencia(e.getReferencia()))
-                    .precioParcial(e.getPrecioParcial())
-                    .cantidad(e.getCantidad())
-                    .producto(productosRepo.findByid(e.getProducto()))
-                    .build()).toList();
-            List<Carrito> nuevoCarrito = carritoRepo.guardar(carritos);
-            return nuevoCarrito.stream().map(e-> CarritoDto.builder()
-                    .id(e.getId())
-                    .referencia(e.getReferencia().getReferencia())
-                    .precioParcial(e.getPrecioParcial())
-                    .cantidad(e.getCantidad())
-                    .build()).toList();
+
+            Carrito nuevoProducto = carritoMapper.deGuardarCarrito(dto);
+            Productos producto = productosRepo.findByid(dto.getProducto());
+            nuevoProducto.setProducto(producto);
+            nuevoProducto.setPrecioParcial(producto.getPrecio()*producto.getPrecio());
+            nuevoProducto.setReferencia(ordenesRepo.findByReferencia(referencia));
+
+            return carritoMapper.deResponseCarrito(carritoRepo.guardar(nuevoProducto));
+
         }catch (Exception e){
             throw new RuntimeException(e.getCause());
         }

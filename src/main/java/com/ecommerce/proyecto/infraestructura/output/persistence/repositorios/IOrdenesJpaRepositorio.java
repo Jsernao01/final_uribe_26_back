@@ -14,6 +14,7 @@ import java.util.function.Function;
 public interface IOrdenesJpaRepositorio extends JpaRepository<OrdenesJpa, UUID>{
 
     Optional<OrdenesJpa> findByReferencia(String referencia);
+    Optional<OrdenesJpa> findTopByOrderByReferenciaDesc ();
 }
 
 

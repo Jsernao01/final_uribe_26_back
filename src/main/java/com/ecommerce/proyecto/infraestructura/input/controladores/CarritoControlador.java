@@ -6,12 +6,10 @@ import com.ecommerce.proyecto.dominio.dtos.peticiones.GuardarProductoDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -21,10 +19,10 @@ public class CarritoControlador {
 
     private final CarritoPuerto carritoPuerto;
 
-    @PostMapping("/guardar")
-    public ResponseEntity<?> guardarCarrito(@RequestBody List<GuardarCarritoDto> dto){
+    @PostMapping("/guardar({idCliente}/{referencia}")
+    public ResponseEntity<?> guardarCarrito(@RequestBody GuardarCarritoDto dto, @PathVariable("idCliente") UUID idCliente, @PathVariable("referencia") String refencia){
         try{
-            return ResponseEntity.ok(carritoPuerto.guardarCarrito(dto));
+            return ResponseEntity.ok(carritoPuerto.guardarCarrito(dto, idCliente, refencia));
         }catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
 
