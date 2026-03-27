@@ -34,4 +34,22 @@ public class CarritoAdaptador implements ICarritoRepositorio {
         }
     }
 
+    @Override
+    public Carrito findById(UUID id) {
+        try {
+            return carritoMapper.aModelo(carritoRepo.findById(id).orElseThrow());
+        }catch (Exception e){
+            throw new RuntimeException("Error al buscar un producto en el carrito con el id: "+id+", ",e);
+        }
+    }
+
+    @Override
+    public void eliminar(Carrito carrito) {
+        try {
+            carritoRepo.delete(carritoMapper.aEntidad(carrito));
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+
 }

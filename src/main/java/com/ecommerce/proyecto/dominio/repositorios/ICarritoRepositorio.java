@@ -9,5 +9,8 @@ import java.util.UUID;
 public interface ICarritoRepositorio {
 
     Carrito guardar(Carrito carrito);
+    Carrito findById(UUID id);
+    void eliminar(Carrito carrito);
+
 
 }

@@ -35,9 +35,6 @@ public class ProductosJpa {
     private Boolean activo;
 
     @OneToMany(mappedBy = "producto")
-    private List<CarritoJpa> carritos;
-
-    @OneToMany(mappedBy = "producto")
     private  List<CategoriasJpa> categorias;
 
     @OneToMany(mappedBy = "producto")

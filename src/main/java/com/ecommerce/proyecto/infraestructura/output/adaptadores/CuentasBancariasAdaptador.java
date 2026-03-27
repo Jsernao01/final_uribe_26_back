@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
@@ -24,6 +25,39 @@ public class CuentasBancariasAdaptador implements ICuentasBancariasRepositorio {
             return cuentasBancariasMapper.aModeloLista(cuentasBancariasRepo.saveAll(cuentaNueva));
         }catch (Exception e){
             throw new RuntimeException("Error al guardar una cuenta bancaria", e);
+        }
+    }
+
+    @Override
+    public CuentasBancarias findById(UUID idCuenta) {
+        try{
+            return cuentasBancariasMapper.aModelo(cuentasBancariasRepo.findById(idCuenta).orElseThrow());
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public CuentasBancarias actualizar(CuentasBancarias cuenta, UUID idCuenta) {
+        try {
+            CuentasBancariasJpa cuentaActualizada = cuentasBancariasRepo.findById(idCuenta).orElseThrow();
+            if (cuenta.getCuenta() != null) cuentaActualizada.setCuenta(cuenta.getCuenta());
+            if (cuenta.getTipoCuenta() != null) cuentaActualizada.setTipoCuenta(cuenta.getTipoCuenta());
+            if (cuenta.getNombreBanco() != null) cuentaActualizada.setNombreBanco(cuenta.getNombreBanco());
+
+            return cuentasBancariasMapper.aModelo(cuentasBancariasRepo.save(cuentaActualizada));
+        }catch (Exception e){
+            throw new RuntimeException("error al actualizar la cuenta bancaria", e);
+        }
+    }
+
+    @Override
+    public Boolean eliminar(UUID id) {
+        try {
+            cuentasBancariasRepo.delete(cuentasBancariasRepo.findById(id).orElseThrow());
+            return true;
+        }catch (Exception e){
+            return false;
         }
     }
 }

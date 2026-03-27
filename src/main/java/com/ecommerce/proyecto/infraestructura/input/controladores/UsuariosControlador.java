@@ -3,6 +3,7 @@ package com.ecommerce.proyecto.infraestructura.input.controladores;
 import com.ecommerce.proyecto.adaptadores.puertos.input.UsuariosPuerto;
 import com.ecommerce.proyecto.dominio.dtos.peticiones.ActualizarContrasena;
 import com.ecommerce.proyecto.dominio.dtos.peticiones.ActualizarUsuarioDto;
+import com.ecommerce.proyecto.dominio.dtos.peticiones.FiltrosUsuariosDto;
 import com.ecommerce.proyecto.dominio.dtos.peticiones.GuardarUsuarioDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +44,15 @@ public class UsuariosControlador {
             return ResponseEntity.ok(usuariosPuerto.actualizarContrasena(dto));
         }catch (Exception e){
             return ResponseEntity.badRequest().body(e.getCause());
+        }
+    }
+
+    @GetMapping("/listar")
+    public ResponseEntity<?> listarPorFiltros(@RequestBody FiltrosUsuariosDto filtros){
+        try {
+            return ResponseEntity.ok(usuariosPuerto.FiltrarUsuarios(filtros));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 

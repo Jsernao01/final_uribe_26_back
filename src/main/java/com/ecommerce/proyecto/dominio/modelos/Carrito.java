@@ -14,5 +14,5 @@ public class Carrito {
     private Ordenes referencia;
     private Integer precioParcial;
     private Integer cantidad;
-    private Productos producto;
+    private Stock stock;
 }

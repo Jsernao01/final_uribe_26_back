@@ -4,6 +4,7 @@ import com.ecommerce.proyecto.dominio.modelos.Productos;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -31,4 +32,7 @@ public class StockJpa {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_producto")
     private ProductosJpa producto;
+
+    @OneToMany(mappedBy = "stock")
+    private List<CarritoJpa> carritos;
 }

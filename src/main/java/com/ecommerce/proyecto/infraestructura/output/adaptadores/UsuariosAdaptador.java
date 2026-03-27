@@ -1,6 +1,7 @@
 package com.ecommerce.proyecto.infraestructura.output.adaptadores;
 
 import com.ecommerce.proyecto.dominio.dtos.peticiones.ActualizarContrasena;
+import com.ecommerce.proyecto.dominio.dtos.peticiones.FiltrosUsuariosDto;
 import com.ecommerce.proyecto.dominio.modelos.Usuarios;
 import com.ecommerce.proyecto.dominio.repositorios.IUsuariosRepositorio;
 import com.ecommerce.proyecto.infraestructura.output.persistence.entidades.UsuariosJpa;
@@ -12,7 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
+
+import static com.ecommerce.proyecto.infraestructura.output.especificaciones.EspecificacionUsuario.crearEspecificacion;
 
 @Repository
 @RequiredArgsConstructor
@@ -72,6 +76,15 @@ public class UsuariosAdaptador implements IUsuariosRepositorio {
     @Override
     public Usuarios findById(UUID idUsuario) {
         return usuariosMapper.aModelo(usuariosRepo.findById(idUsuario).orElseThrow());
+    }
+
+    @Override
+    public List<Usuarios> FiltrarUsuarios(FiltrosUsuariosDto filtros) {
+        try {
+            return usuariosMapper.aModeloLista(usuariosRepo.findAll(crearEspecificacion(filtros)));
+        }catch (Exception e){
+            throw new RuntimeException("error al filtrar usuarios: ", e);
+        }
     }
 
 

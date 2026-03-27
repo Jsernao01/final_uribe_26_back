@@ -11,7 +11,6 @@ import java.util.List;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface UsuariosJpaMapper {
 
-    @Mapping(target = "fechaRegistro", ignore = true)
     Usuarios aModelo (UsuariosJpa entidad);
 
     UsuariosJpa aEntidad (Usuarios modelo);

@@ -16,6 +16,9 @@ public interface UsuariosMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "rol", ignore = true)
     @Mapping(target = "fechaRegistro", ignore = true)
+    @Mapping(target = "nombres", expression = "java(dto.getNombres().toLowerCase())")
+    @Mapping(target = "apellidos", expression = "java(dto.getApellidos().toLowerCase())")
+    @Mapping(target = "correo", expression = "java(dto.getCorreo().toLowerCase())")
     Usuarios deGuardarUsuario(GuardarUsuarioDto dto);
 
     Usuarios deActualizarUsuario(ActualizarUsuarioDto dto);

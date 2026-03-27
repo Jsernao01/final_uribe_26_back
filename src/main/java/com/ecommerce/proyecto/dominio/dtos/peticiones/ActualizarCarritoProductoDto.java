@@ -9,8 +9,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ActualizarContrasena {
-    public UUID id;
-    public String contrasenaNueva;
-    public String contrasenaVieja;
+public class ActualizarCarritoProductoDto {
+    private UUID id;
+    private Integer cantidad;
 }

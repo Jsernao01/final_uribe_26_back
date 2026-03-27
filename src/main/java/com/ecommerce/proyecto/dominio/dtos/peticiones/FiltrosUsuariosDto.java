@@ -2,16 +2,13 @@ package com.ecommerce.proyecto.dominio.dtos.peticiones;
 
 import lombok.*;
 
-import java.util.UUID;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class GuardarCarritoDto {
-
-    private Integer cantidad;
-    private UUID idStock;
-
+public class FiltrosUsuariosDto {
+    public String nombres;
+    public String apellidos;
+    public String correo;
 }
