@@ -36,4 +36,14 @@ public class StockAdaptador implements IStockRepositorio {
             throw new RuntimeException("Error al buscar el stock con el id: "+id+" ",e);
         }
     }
+
+    @Override
+    public Boolean eliminarStock(UUID idStock) {
+        try {
+            stockRepo.deleteById(idStock);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 }

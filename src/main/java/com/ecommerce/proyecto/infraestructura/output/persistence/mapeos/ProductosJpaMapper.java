@@ -11,7 +11,6 @@ import java.util.List;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ProductosJpaMapper {
 
-    @Mapping(target = "lanzamiento", ignore = true)
     Productos aModelo (ProductosJpa entidad);
 
     ProductosJpa aEntidad (Productos modelo);

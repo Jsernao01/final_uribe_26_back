@@ -8,6 +8,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -37,7 +38,7 @@ public class DescuentosJpa {
     @Column(nullable = false)
     private Boolean activo;
 
-    @Column(unique = true)
+    @Column()
     private String razon;
 
     @Column(name = "fecha_inicio", nullable = false)
@@ -46,8 +47,7 @@ public class DescuentosJpa {
     @Column(name = "fecha_final")
     private LocalDateTime fin;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_producto", unique = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_producto")
     private ProductosJpa producto;
-
 }

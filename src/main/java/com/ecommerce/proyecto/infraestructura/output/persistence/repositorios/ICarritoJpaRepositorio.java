@@ -4,6 +4,7 @@ import com.ecommerce.proyecto.infraestructura.output.persistence.entidades.Carri
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -11,4 +12,5 @@ import java.util.UUID;
 public interface ICarritoJpaRepositorio extends JpaRepository<CarritoJpa, UUID> {
 
     Optional<CarritoJpa> findTopByOrderByReferenciaDesc();
+    List<CarritoJpa> findAllByReferenciaReferencia(String referencia);
 }

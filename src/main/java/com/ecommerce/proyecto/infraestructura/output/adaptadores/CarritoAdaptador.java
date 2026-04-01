@@ -44,6 +44,16 @@ public class CarritoAdaptador implements ICarritoRepositorio {
     }
 
     @Override
+    public List<Carrito> findAllByReferencia(String referencia) {
+        try {
+            List<CarritoJpa> carritosJpa = carritoRepo.findAllByReferenciaReferencia(referencia);
+            return carritoMapper.aModeloLista(carritosJpa);
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public void eliminar(Carrito carrito) {
         try {
             carritoRepo.delete(carritoMapper.aEntidad(carrito));

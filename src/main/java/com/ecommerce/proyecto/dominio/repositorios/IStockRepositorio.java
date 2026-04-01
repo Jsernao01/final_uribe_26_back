@@ -9,5 +9,6 @@ public interface IStockRepositorio {
 
     List<Stock> guardar(List<Stock> stock);
     Stock findById(UUID id);
+    Boolean eliminarStock(UUID idStock);
 
 }

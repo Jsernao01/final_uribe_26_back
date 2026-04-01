@@ -40,6 +40,7 @@ public class ProductosJpa {
     @OneToMany(mappedBy = "producto")
     private List<StockJpa> stocks;
 
-    @OneToOne(mappedBy = "producto")
-    private DescuentosJpa descuento;
+
+    @OneToMany(mappedBy = "producto")
+    private List<DescuentosJpa> descuento;
 }

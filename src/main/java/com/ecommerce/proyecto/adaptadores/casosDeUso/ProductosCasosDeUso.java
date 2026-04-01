@@ -4,8 +4,10 @@ import com.ecommerce.proyecto.adaptadores.mapeos.CategoriasMapper;
 import com.ecommerce.proyecto.adaptadores.mapeos.ProductosMapper;
 import com.ecommerce.proyecto.adaptadores.mapeos.StockMapper;
 import com.ecommerce.proyecto.adaptadores.puertos.input.ProductosPuerto;
+import com.ecommerce.proyecto.adaptadores.puertos.input.StockPuerto;
 import com.ecommerce.proyecto.dominio.dtos.peticiones.GuardarProductoDto;
 import com.ecommerce.proyecto.dominio.dtos.respuesta.ProductosDto;
+import com.ecommerce.proyecto.dominio.dtos.respuesta.StockDto;
 import com.ecommerce.proyecto.dominio.modelos.Categorias;
 import com.ecommerce.proyecto.dominio.modelos.Productos;
 import com.ecommerce.proyecto.dominio.modelos.Stock;
@@ -23,9 +25,8 @@ public class ProductosCasosDeUso implements ProductosPuerto {
 
     private final ProductosMapper productosMapper;
     private final CategoriasMapper categoriasMapper;
-    private final StockMapper stockMapper;
     private final IProductosRepositorio productosRepo;
-    private final IStockRepositorio stockRepo;
+    private final StockPuerto stockPuerto;
     private final ICategoriasRepositorio categoriasRepo;
 
     @Override
@@ -33,10 +34,7 @@ public class ProductosCasosDeUso implements ProductosPuerto {
         try{
             Productos nuevoProducto = productosRepo.guardar(productosMapper.deGuardarProducto(producto));
 
-            List<Stock> stockNoAsignado = stockMapper.deGuardarStockList(producto.getStock());
-            stockNoAsignado.forEach(e-> e.setProducto(nuevoProducto));
-
-            List<Stock> stockAsignado = stockRepo.guardar(stockNoAsignado);
+            List<StockDto> stockAsignado = stockPuerto.guardarStock(producto.getStock(), nuevoProducto.getId());
 
             List<Categorias> categoriasNoAsignadas = categoriasMapper.deStringList(producto.getCategorias());
             categoriasNoAsignadas.forEach(e-> e.setProducto(nuevoProducto));

@@ -11,7 +11,6 @@ import java.util.List;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface SolicitudesJpaMapper {
 
-    @Mapping(target = "fecha", ignore = true)
     Solicitudes aModelo (SolicitudesJpa entidad);
 
     SolicitudesJpa aEntidad (Solicitudes modelo);

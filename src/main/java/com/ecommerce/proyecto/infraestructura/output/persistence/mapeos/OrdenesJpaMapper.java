@@ -11,7 +11,6 @@ import java.util.List;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface OrdenesJpaMapper {
 
-    @Mapping(target = "fecha", ignore = true)
     Ordenes aModelo (OrdenesJpa entidad);
 
     OrdenesJpa aEntidad (Ordenes modelo);

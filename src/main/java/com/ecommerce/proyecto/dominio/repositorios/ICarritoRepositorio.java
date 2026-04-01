@@ -10,6 +10,7 @@ public interface ICarritoRepositorio {
 
     Carrito guardar(Carrito carrito);
     Carrito findById(UUID id);
+    List<Carrito> findAllByReferencia(String referencia);
     void eliminar(Carrito carrito);
 
 
