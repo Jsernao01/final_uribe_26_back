@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
@@ -24,6 +25,16 @@ public class CategoriasAdaptador implements ICategoriasRepositorio {
             return categoriasMapper.aModeloLista(categoriasRepo.saveAll(categoriasNuevas));
         }catch (Exception e){
             throw new RuntimeException("Error al guardar las categorias", e);
+        }
+    }
+
+    @Override
+    public boolean eliminar(UUID idCategoria) {
+        try {
+            categoriasRepo.deleteById(idCategoria);
+            return true;
+        }catch (Exception e){
+            return false;
         }
     }
 }

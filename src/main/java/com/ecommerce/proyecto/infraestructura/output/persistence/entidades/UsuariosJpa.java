@@ -66,6 +66,4 @@ public class UsuariosJpa {
     @OneToMany(mappedBy = "cliente")
     private List<CuentasBancariasJpa> cuentasBancarias;
 
-    @OneToMany(mappedBy = "cliente")
-    private List<SolicitudesJpa> solicitudes;
 }

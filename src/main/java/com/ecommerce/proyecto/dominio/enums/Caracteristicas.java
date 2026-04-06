@@ -7,7 +7,9 @@ public enum Caracteristicas {
     PANTALON("pantalon"),
     CAMISA("camisa"),
     CHAQUETA("chaqueta"),
-    JEAN("jean");
+    JEAN("jean"),
+    COUNTRY("country"),
+    VINTAGE("vintage");
 
     private final String descripcion;
 

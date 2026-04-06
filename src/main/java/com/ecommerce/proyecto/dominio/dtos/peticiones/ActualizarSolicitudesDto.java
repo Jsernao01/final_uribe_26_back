@@ -2,14 +2,16 @@ package com.ecommerce.proyecto.dominio.dtos.peticiones;
 
 import lombok.*;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ActualizarOrdenDto {
+public class ActualizarSolicitudesDto {
 
-    private String referencia;
-    private String estado;
+    private UUID id;
+    private String estadoSolicitud;
 
 }

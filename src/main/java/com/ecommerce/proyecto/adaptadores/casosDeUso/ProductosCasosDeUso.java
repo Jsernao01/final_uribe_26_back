@@ -3,9 +3,12 @@ package com.ecommerce.proyecto.adaptadores.casosDeUso;
 import com.ecommerce.proyecto.adaptadores.mapeos.CategoriasMapper;
 import com.ecommerce.proyecto.adaptadores.mapeos.ProductosMapper;
 import com.ecommerce.proyecto.adaptadores.mapeos.StockMapper;
+import com.ecommerce.proyecto.adaptadores.puertos.input.CategoriasPuerto;
 import com.ecommerce.proyecto.adaptadores.puertos.input.ProductosPuerto;
 import com.ecommerce.proyecto.adaptadores.puertos.input.StockPuerto;
+import com.ecommerce.proyecto.dominio.dtos.peticiones.GuardarCategoriaDto;
 import com.ecommerce.proyecto.dominio.dtos.peticiones.GuardarProductoDto;
+import com.ecommerce.proyecto.dominio.dtos.respuesta.CategoriaDto;
 import com.ecommerce.proyecto.dominio.dtos.respuesta.ProductosDto;
 import com.ecommerce.proyecto.dominio.dtos.respuesta.StockDto;
 import com.ecommerce.proyecto.dominio.modelos.Categorias;
@@ -24,10 +27,9 @@ import java.util.List;
 public class ProductosCasosDeUso implements ProductosPuerto {
 
     private final ProductosMapper productosMapper;
-    private final CategoriasMapper categoriasMapper;
     private final IProductosRepositorio productosRepo;
     private final StockPuerto stockPuerto;
-    private final ICategoriasRepositorio categoriasRepo;
+    private final CategoriasPuerto categoriasPuerto;
 
     @Override
     public ProductosDto guardarProducto(GuardarProductoDto producto) {
@@ -36,10 +38,11 @@ public class ProductosCasosDeUso implements ProductosPuerto {
 
             List<StockDto> stockAsignado = stockPuerto.guardarStock(producto.getStock(), nuevoProducto.getId());
 
-            List<Categorias> categoriasNoAsignadas = categoriasMapper.deStringList(producto.getCategorias());
-            categoriasNoAsignadas.forEach(e-> e.setProducto(nuevoProducto));
-
-            List<Categorias> categoriasAsignadas = categoriasRepo.guardar(categoriasNoAsignadas);
+            GuardarCategoriaDto categoriaDto = GuardarCategoriaDto.builder()
+                    .idProducto(nuevoProducto.getId())
+                    .caracteristicas(producto.getCategorias())
+                    .build();
+            List<CategoriaDto> categorias = categoriasPuerto.guardarCategoria(categoriaDto);
 
             return ProductosDto.builder()
                     .id(nuevoProducto.getId())
@@ -51,13 +54,13 @@ public class ProductosCasosDeUso implements ProductosPuerto {
                             .talla(e.getTalla())
                             .cantidad(e.getCantidad())
                             .build()).toList())
-                    .categorias(categoriasAsignadas.stream().map(e-> ProductosDto.CategoriasDto.builder()
+                    .categorias(categorias.stream().map(e-> ProductosDto.CategoriasDto.builder()
                             .id(e.getId())
-                            .caracteristica(e.getCaracteristica().getDescripcion())
+                            .caracteristica(e.getCaracteristica())
                             .build()).toList())
             .build();
         }catch (Exception e){
-            throw new RuntimeException(e.getCause());
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

@@ -1,10 +1,8 @@
 package com.ecommerce.proyecto.infraestructura.output.persistence.entidades;
 
+import com.ecommerce.proyecto.dominio.enums.EstadoSolicitud;
 import com.ecommerce.proyecto.dominio.enums.MotivosCancelacion;
 import com.ecommerce.proyecto.dominio.enums.MotivosDevolucion;
-import com.ecommerce.proyecto.dominio.enums.TiposSolicitud;
-import com.ecommerce.proyecto.dominio.modelos.Ordenes;
-import com.ecommerce.proyecto.dominio.modelos.Usuarios;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -30,20 +28,16 @@ public class SolicitudesJpa {
     private LocalDateTime fecha;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false,name = "tipo_solicitud")
-    private TiposSolicitud tipo;
+    @Column(nullable = false,name = "estado_solicitud")
+    private EstadoSolicitud estadoSolicitud;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "motivo_devolucion")
-    private MotivosDevolucion motivooDevolucion;
+    private MotivosDevolucion motivoDevolucion;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "motivo_cancelacion")
     private MotivosCancelacion motivoCancelacion;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_cliente")
-    private UsuariosJpa cliente;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_orden")

@@ -23,7 +23,7 @@ public class ProductosAdaptador implements IProductosRepositorio {
             ProductosJpa productoNuevo = productosMapper.aEntidad(producto);
             return productosMapper.aModelo(productosRepo.save(productoNuevo));
         }catch (Exception e){
-            throw new RuntimeException("Error al guardar un producto", e);
+            throw new RuntimeException("Error al guardar un producto: " + e.getMessage());
         }
     }
 

@@ -1,5 +1,4 @@
 package com.ecommerce.proyecto.dominio.dtos.peticiones;
-
 import lombok.*;
 
 @Getter
@@ -7,9 +6,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ActualizarOrdenDto {
+public class GuardarSolicitudDto {
 
+    private String motivoDevolucion;
+    private String motivoCancelacion;
     private String referencia;
-    private String estado;
 
 }
