@@ -12,6 +12,6 @@ import java.util.UUID;
 @Builder
 public class GuardarCuentaBancariaDto {
     private String nombreBanco;
-    private Integer cuenta;
-    private TiposCuentas tipoCuenta;
+    private String cuenta;
+    private String tipoCuenta;
 }

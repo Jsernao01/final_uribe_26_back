@@ -22,7 +22,7 @@ public class CuentasBancariasJpa {
     @Column(name = "nombre_banco", nullable = false)
     private String nombreBanco;
 
-    @Column(name = "numero_cuenta", nullable = false, unique = true)
+    @Column(name = "numero_cuenta", nullable = false)
     private String cuenta;
 
     @Enumerated(EnumType.STRING)

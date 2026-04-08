@@ -3,14 +3,15 @@ package com.ecommerce.proyecto.dominio.enums;
 import lombok.Getter;
 
 @Getter
-public enum TiposSolicitud {
-    CANCELACION("cancelacion"),
-    DEVOLUCION("devolucion"),
-    CONTINUACION("continuacion");
+public enum DescuentoObjetivo {
+
+    CLIENTE("cliente"),
+    PRENDA("prenda");
 
     private final String descripcion;
 
-    TiposSolicitud(String descripcion) {
+    DescuentoObjetivo(String descripcion) {
         this.descripcion = descripcion;
     }
+
 }

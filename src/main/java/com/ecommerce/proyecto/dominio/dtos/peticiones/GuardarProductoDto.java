@@ -16,15 +16,4 @@ public class GuardarProductoDto {
     private List<GuardarStockDto> stock;
     private List<String> categorias;
 
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder
-    public static class GuardarStockDto{
-        private String talla;
-        private Integer cantidad;
-        private String color;
-    }
-
 }

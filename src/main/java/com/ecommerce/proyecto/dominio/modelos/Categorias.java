@@ -9,6 +9,7 @@ import java.util.UUID;
 @Getter
 @Setter
 public class Categorias {
+
     private UUID id;
     private Caracteristicas caracteristica;
     private Productos producto;

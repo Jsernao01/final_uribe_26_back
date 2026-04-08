@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
@@ -24,6 +25,34 @@ public class StockAdaptador implements IStockRepositorio {
             return stockMapper.aModeloLista(stockRepo.saveAll(stockNuevo));
         }catch (Exception e){
             throw new RuntimeException("Error al guardar el stock", e);
+        }
+    }
+
+    @Override
+    public Stock findById(UUID id) {
+        try {
+            return stockMapper.aModelo(stockRepo.findById(id).orElseThrow());
+        }catch (Exception e){
+            throw new RuntimeException("Error al buscar el stock con el id: "+id+" ",e);
+        }
+    }
+
+    @Override
+    public Boolean eliminarStock(UUID idStock) {
+        try {
+            stockRepo.deleteById(idStock);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    @Override
+    public List<Stock> findByProducto(UUID idProducto) {
+        try {
+            return stockMapper.aModeloLista(stockRepo.findALLByProductoId(idProducto));
+        }catch (Exception e){
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

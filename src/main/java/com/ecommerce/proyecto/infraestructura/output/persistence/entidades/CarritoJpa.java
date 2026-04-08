@@ -1,5 +1,6 @@
 package com.ecommerce.proyecto.infraestructura.output.persistence.entidades;
 
+import com.ecommerce.proyecto.dominio.modelos.Stock;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,7 +30,7 @@ public class CarritoJpa {
     private Integer cantidad;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_producto", nullable = false)
-    private ProductosJpa producto;
+    @JoinColumn(name = "id_stock", nullable = false)
+    private StockJpa stock;
 
 }

@@ -19,15 +19,14 @@ import java.util.UUID;
 @Setter
 public class OrdenesJpa {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(columnDefinition = "UUID")
-    private UUID referencia;
+    @Column()
+    private String  referencia;
 
     @CreationTimestamp
-    @Column(name = "fecha_registro", nullable = false)
+    @Column(name = "fecha_registro")
     private LocalDateTime fecha;
 
-    @Column(name = "precio_total", nullable = false)
+    @Column(name = "precio_total")
     private Integer precioTotal;
 
     @Enumerated(EnumType.STRING)

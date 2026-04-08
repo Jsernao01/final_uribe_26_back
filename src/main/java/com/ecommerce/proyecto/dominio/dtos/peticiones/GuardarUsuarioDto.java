@@ -22,6 +22,6 @@ public class GuardarUsuarioDto {
     private Roles rol;
     private LocalDate nacimiento;
     private String direccion;
-    private String contraseña;
+    private String contrasena;
     private List<GuardarCuentaBancariaDto> cuentasBancarias;
 }
