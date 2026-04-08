@@ -8,21 +8,18 @@ import com.ecommerce.proyecto.infraestructura.output.persistence.entidades.Usuar
 import com.ecommerce.proyecto.infraestructura.output.persistence.mapeos.UsuariosJpaMapper;
 import com.ecommerce.proyecto.infraestructura.output.persistence.repositorios.IUsuariosJpaRepositorio;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.UUID;
 
-import static com.ecommerce.proyecto.infraestructura.output.especificaciones.EspecificacionUsuario.crearEspecificacion;
+import static com.ecommerce.proyecto.infraestructura.output.especificaciones.EspecificacionUsuario.crearEspecificacionUsuarios;
 
 @Repository
 @RequiredArgsConstructor
 public class UsuariosAdaptador implements IUsuariosRepositorio {
 
-    private static final Logger log = LoggerFactory.getLogger(UsuariosAdaptador.class);
     private final UsuariosJpaMapper usuariosMapper;
     private final IUsuariosJpaRepositorio usuariosRepo;
     private final PasswordEncoder codificarContrasena;
@@ -33,7 +30,7 @@ public class UsuariosAdaptador implements IUsuariosRepositorio {
             UsuariosJpa usuarioGuardar = usuariosMapper.aEntidad(usuario);
             return usuariosMapper.aModelo(usuariosRepo.save(usuarioGuardar));
         }catch (Exception e){
-            throw new RuntimeException("Error al guardar un usuario", e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -50,7 +47,7 @@ public class UsuariosAdaptador implements IUsuariosRepositorio {
 
             return usuariosMapper.aModelo(usuariosRepo.save(usuarioJpa));
         }catch (Exception e){
-            throw new RuntimeException(e.getCause());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -69,7 +66,7 @@ public class UsuariosAdaptador implements IUsuariosRepositorio {
             }
             return false;
         }catch (Exception e){
-            throw new RuntimeException(e.getCause());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -81,9 +78,9 @@ public class UsuariosAdaptador implements IUsuariosRepositorio {
     @Override
     public List<Usuarios> FiltrarUsuarios(FiltrosUsuariosDto filtros) {
         try {
-            return usuariosMapper.aModeloLista(usuariosRepo.findAll(crearEspecificacion(filtros)));
+            return usuariosMapper.aModeloLista(usuariosRepo.findAll(crearEspecificacionUsuarios(filtros)));
         }catch (Exception e){
-            throw new RuntimeException("error al filtrar usuarios: ", e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 

@@ -8,8 +8,6 @@ import com.ecommerce.proyecto.dominio.modelos.Categorias;
 import com.ecommerce.proyecto.dominio.repositorios.ICategoriasRepositorio;
 import com.ecommerce.proyecto.dominio.repositorios.IProductosRepositorio;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +17,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CategoriasCasosDeUso implements CategoriasPuerto {
 
-    private static final Logger log = LoggerFactory.getLogger(CategoriasCasosDeUso.class);
     private final CategoriasMapper categoriasMapper;
     private final ICategoriasRepositorio categoriasRepo;
     private final IProductosRepositorio productosRepo;

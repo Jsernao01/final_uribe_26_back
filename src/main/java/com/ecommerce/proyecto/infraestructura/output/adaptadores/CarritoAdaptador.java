@@ -30,7 +30,7 @@ public class CarritoAdaptador implements ICarritoRepositorio {
         try {
             return carritoMapper.aModelo(carritoRepo.save(carritoMapper.aEntidad(carrito)));
         }catch (Exception e){
-            throw new RuntimeException("Error al guardar el Producto en el Carrito");
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -39,7 +39,7 @@ public class CarritoAdaptador implements ICarritoRepositorio {
         try {
             return carritoMapper.aModelo(carritoRepo.findById(id).orElseThrow());
         }catch (Exception e){
-            throw new RuntimeException("Error al buscar un producto en el carrito con el id: "+id+", ",e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -49,7 +49,7 @@ public class CarritoAdaptador implements ICarritoRepositorio {
             List<CarritoJpa> carritosJpa = carritoRepo.findAllByReferenciaReferencia(referencia);
             return carritoMapper.aModeloLista(carritosJpa);
         }catch (Exception e){
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -58,7 +58,7 @@ public class CarritoAdaptador implements ICarritoRepositorio {
         try {
             carritoRepo.delete(carritoMapper.aEntidad(carrito));
         }catch (Exception e){
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 

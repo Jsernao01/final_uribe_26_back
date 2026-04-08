@@ -28,7 +28,7 @@ public class OrdenesAdaptador implements IOrdenesRepositorio {
             OrdenesJpa ordenesNuevo = ordenesMapper.aEntidad(orden);
             return ordenesMapper.aModelo(ordenesRepo.save(ordenesNuevo));
         }catch (Exception e){
-            throw new RuntimeException("Error al guardar una orden: ", e.getCause());
+            throw new RuntimeException(e.getMessage());
         }
 
     }

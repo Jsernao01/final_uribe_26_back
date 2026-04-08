@@ -41,7 +41,7 @@ public class CuentasBancariasCasosDeUso implements CuentasBancariasPuerto {
             }
             return cuentasBancariasResponse;
         }catch (Exception e){
-            throw new RuntimeException(e.getCause());
+            throw new RuntimeException("Error al guardar una cuenta bancaria"+e.getMessage());
         }
     }
 
@@ -55,7 +55,7 @@ public class CuentasBancariasCasosDeUso implements CuentasBancariasPuerto {
             cuentaResponse.setTipoCuenta(cuentaActualizada.getTipoCuenta().getDescripcion());
             return cuentaResponse;
         }catch (Exception e){
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error al actualizar una cuenta bancaria"+e.getMessage());
         }
     }
 

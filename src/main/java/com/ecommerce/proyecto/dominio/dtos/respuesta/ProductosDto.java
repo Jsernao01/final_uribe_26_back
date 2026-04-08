@@ -16,17 +16,19 @@ public class ProductosDto {
 
     private UUID id;
     private String nombre;
+    private Integer descuento;
     private LocalDateTime lanzamiento;
     private Integer precio;
-    private List<StockDto> stock;
-    private List<CategoriasDto> categorias;
+    private List<InStockDto> stock;
+    private List<InCategoriasDto> categorias;
+    private Boolean activo;
 
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class StockDto{
+    public static class InStockDto{
         private String talla;
         private Integer cantidad;
         private String color;
@@ -37,7 +39,7 @@ public class ProductosDto {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class CategoriasDto{
+    public static class InCategoriasDto{
         private UUID id;
         private String caracteristica;
     }

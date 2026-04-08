@@ -9,5 +9,6 @@ public interface ICategoriasRepositorio {
 
     List<Categorias> guardar(List<Categorias> categorias);
     boolean eliminar(UUID idCategoria);
+    List<Categorias> findByProducto(UUID idProducto);
 
 }

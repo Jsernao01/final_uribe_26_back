@@ -8,9 +8,9 @@ import com.ecommerce.proyecto.infraestructura.output.persistence.repositorios.ID
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 
 @Repository
 @RequiredArgsConstructor
@@ -25,17 +25,18 @@ public class DescuentosAdaptador implements IDescuentosRepositorio {
             DescuentosJpa descuentoNuevo = descuentosMapper.aEntidad(descuento);
             return descuentosMapper.aModelo(descuentoRepo.save(descuentoNuevo));
         }catch (Exception e){
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
     public Optional<Descuentos> buscarDescuentoPorProductoActivo(UUID idProducto) {
         try{
-            Optional<DescuentosJpa> descuento = descuentoRepo.findByProductoIdAndActivoTrue(idProducto);
+            LocalDateTime fecha = LocalDateTime.now();
+            Optional<DescuentosJpa> descuento = descuentoRepo.findByProductoIdAndActivoTrueAndInicioLessThanEqualAndFinGreaterThanEqual(idProducto, fecha, fecha);
             return descuento.map(descuentosMapper::aModelo);
         }catch (Exception e){
-         throw new RuntimeException(e);
+         throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -44,7 +45,7 @@ public class DescuentosAdaptador implements IDescuentosRepositorio {
         try {
             return descuentoRepo.findById(idDescuento).map(descuentosMapper::aModelo);
         }catch (Exception e){
-            throw new RuntimeException(e.getCause() );
+            throw new RuntimeException(e.getMessage());
         }
     }
 

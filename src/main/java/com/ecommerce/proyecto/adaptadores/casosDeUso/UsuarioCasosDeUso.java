@@ -14,8 +14,6 @@ import com.ecommerce.proyecto.dominio.modelos.Usuarios;
 import com.ecommerce.proyecto.dominio.repositorios.IUsuariosRepositorio;
 import lombok.RequiredArgsConstructor;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +24,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UsuarioCasosDeUso implements UsuariosPuerto {
 
-    private static final Logger log = LoggerFactory.getLogger(UsuarioCasosDeUso.class);
     private final UsuariosMapper usuariosMapper;
     private final IUsuariosRepositorio usuariosRepo;
     private final CuentasBancariasPuerto cuentasBancariasPuerto;
@@ -36,7 +33,6 @@ public class UsuarioCasosDeUso implements UsuariosPuerto {
     public UsuarioDto guardarUsuario(GuardarUsuarioDto usuario, String rol) {
         try {
             Usuarios usuarioNoAsignado = usuariosMapper.deGuardarUsuario(usuario);
-            log.info("nacimiento entrada: {}: salida: {}",usuario.getNacimiento(), usuarioNoAsignado.getNacimiento());
             usuarioNoAsignado.setRol(Roles.valueOf(rol.toUpperCase()));
             String contrasena = codificarContrasena.encode(usuario.getContrasena());
             usuarioNoAsignado.setContrasena(contrasena);
@@ -60,7 +56,7 @@ public class UsuarioCasosDeUso implements UsuariosPuerto {
                     .cuentasBancarias(cuentasBancarias)
                     .build();
         }catch (Exception e){
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error al guardar un usuario: "+e.getMessage());
         }
     }
 
@@ -70,7 +66,7 @@ public class UsuarioCasosDeUso implements UsuariosPuerto {
             Usuarios usuarioActualizado = usuariosRepo.actualizar(usuariosMapper.deActualizarUsuario(usuario), id);
             return usuariosMapper.deResponseUsuario(usuarioActualizado);
         }catch (Exception e){
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error al actualizar un usuario: "+e.getMessage());
         }
     }
 
@@ -79,7 +75,7 @@ public class UsuarioCasosDeUso implements UsuariosPuerto {
         try {
             return usuariosRepo.cambiarContrasena(contrasena);
         }catch (Exception e){
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error al actualizar la contraseña: "+e.getMessage());
         }
     }
 
@@ -88,7 +84,7 @@ public class UsuarioCasosDeUso implements UsuariosPuerto {
         try {
             return usuariosRepo.FiltrarUsuarios(filtros);
         }catch (Exception e){
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error al filtrar los usuarios: "+ e.getMessage());
         }
     }
 }

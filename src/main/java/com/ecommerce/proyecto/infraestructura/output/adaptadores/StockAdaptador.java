@@ -46,4 +46,13 @@ public class StockAdaptador implements IStockRepositorio {
             return false;
         }
     }
+
+    @Override
+    public List<Stock> findByProducto(UUID idProducto) {
+        try {
+            return stockMapper.aModeloLista(stockRepo.findALLByProductoId(idProducto));
+        }catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }

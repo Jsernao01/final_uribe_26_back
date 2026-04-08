@@ -34,5 +34,4 @@ public class CategoriasControlador {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
 }

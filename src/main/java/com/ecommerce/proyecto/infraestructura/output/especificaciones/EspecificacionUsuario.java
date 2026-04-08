@@ -20,7 +20,7 @@ public class EspecificacionUsuario {
         return ((root, query, cb) -> correo==null?null:cb.like(root.get("correo"), "%"+correo.toLowerCase()+"%"));
     }
 
-    public static Specification<UsuariosJpa> crearEspecificacion(FiltrosUsuariosDto filtros){
+    public static Specification<UsuariosJpa> crearEspecificacionUsuarios(FiltrosUsuariosDto filtros){
         return Specification.where(porNombres(filtros.getNombres()))
                 .and(porApellidos(filtros.getApellidos()))
                 .and(porCorreo(filtros.getCorreo()));

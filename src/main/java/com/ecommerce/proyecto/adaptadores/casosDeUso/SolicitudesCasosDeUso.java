@@ -6,8 +6,10 @@ import com.ecommerce.proyecto.dominio.dtos.peticiones.ActualizarSolicitudesDto;
 import com.ecommerce.proyecto.dominio.dtos.peticiones.GuardarSolicitudDto;
 import com.ecommerce.proyecto.dominio.dtos.respuesta.SolicitudesDto;
 import com.ecommerce.proyecto.dominio.enums.EstadoSolicitud;
+import com.ecommerce.proyecto.dominio.enums.Estados;
 import com.ecommerce.proyecto.dominio.enums.MotivosCancelacion;
 import com.ecommerce.proyecto.dominio.enums.MotivosDevolucion;
+import com.ecommerce.proyecto.dominio.modelos.Ordenes;
 import com.ecommerce.proyecto.dominio.modelos.Solicitudes;
 import com.ecommerce.proyecto.dominio.repositorios.IOrdenesRepositorio;
 import com.ecommerce.proyecto.dominio.repositorios.ISolicitudesRepositorio;
@@ -28,13 +30,17 @@ public class SolicitudesCasosDeUso implements SolicitudesPuerto {
     public SolicitudesDto guardarSolicitud(GuardarSolicitudDto dto) {
         try {
 
+            Ordenes orden = ordenesRepo.findByReferencia(dto.getReferencia());
 
+            switch (orden.getEstado()){
+                case CANCELADA, ENTREGADA, REGRESADA: throw new RuntimeException("A la orden no se le pueden hacer solicitudes");
+            }
 
             Solicitudes nuevaSolicitud = Solicitudes.builder()
                     .estadoSolicitud(EstadoSolicitud.CREADA)
                     .motivoCancelacion(!Objects.equals(dto.getMotivoCancelacion(), "") ? MotivosCancelacion.valueOf(dto.getMotivoCancelacion().toUpperCase()):null)
                     .motivoDevolucion(!Objects.equals(dto.getMotivoDevolucion(), "") ? MotivosDevolucion.valueOf(dto.getMotivoDevolucion().toUpperCase()):null)
-                    .orden(ordenesRepo.findByReferencia(dto.getReferencia()))
+                    .orden(orden)
                     .build();
 
             SolicitudesDto respuesta = solicitudesMapper.deResponseSolicitudes(solicitudesRepo.guardarSolicitud(nuevaSolicitud));

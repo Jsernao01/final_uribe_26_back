@@ -59,7 +59,7 @@ public class DescuentosCasosDeUso implements DescuentosPuerto {
 
             return respuesta;
         }catch (Exception e){
-            throw new RuntimeException("error al guardar el descuento, ", e);
+            throw new RuntimeException("error al guardar el descuento: "+e.getMessage());
         }
     }
 
@@ -80,7 +80,7 @@ public class DescuentosCasosDeUso implements DescuentosPuerto {
                     })
                     .orElse(null);
         }catch (Exception e){
-            throw new RuntimeException("Error al buscar descuentos del producto con id: {}"+idProducto, e);
+            throw new RuntimeException("Error al buscar descuentos del producto con id: "+idProducto+", "+ e.getMessage());
         }
     }
 
@@ -102,7 +102,7 @@ public class DescuentosCasosDeUso implements DescuentosPuerto {
             }
             return respuesta;
         }catch (Exception e){
-            throw new RuntimeException("error al cambiar la activacion del descuento",e.getCause());
+            throw new RuntimeException("error al cambiar la activacion del descuento: "+e.getMessage());
         }
     }
 
@@ -132,7 +132,7 @@ public class DescuentosCasosDeUso implements DescuentosPuerto {
             }
             return respuesta;
         }catch (Exception e){
-            throw new RuntimeException("Error al actualizar el descuento", e.getCause());
+            throw new RuntimeException("Error al actualizar el descuento:"+ e.getMessage());
         }
     }
 }

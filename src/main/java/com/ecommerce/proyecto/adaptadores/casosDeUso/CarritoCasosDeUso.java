@@ -37,7 +37,7 @@ public class CarritoCasosDeUso implements CarritoPuerto {
                     .build();
             return carritoMapper.deResponseCarrito(carritoRepo.guardar(nuevoProducto));
         }catch (Exception e){
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error al intentar guardar un producto en el carrito: "+e.getMessage());
         }
     }
 
@@ -49,7 +49,7 @@ public class CarritoCasosDeUso implements CarritoPuerto {
             carrito.setPrecioParcial(dto.getCantidad()*carrito.getStock().getProducto().getPrecio());
             return carritoMapper.deResponseCarrito(carritoRepo.guardar(carrito));
         }catch (Exception e){
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error al intentar actualizar un producto en el carrito: "+e.getMessage());
         }
     }
 
@@ -60,7 +60,7 @@ public class CarritoCasosDeUso implements CarritoPuerto {
             carritoRepo.eliminar(carrito);
             return true;
         }catch (Exception e){
-            throw new RuntimeException("error al eliminar un producto del carrito");
+            throw new RuntimeException("error al eliminar un producto del carrito: "+e.getMessage());
         }
     }
 }

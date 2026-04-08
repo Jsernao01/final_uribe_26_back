@@ -1,6 +1,5 @@
 package com.ecommerce.proyecto.adaptadores.casosDeUso;
 
-import ch.qos.logback.core.encoder.EchoEncoder;
 import com.ecommerce.proyecto.adaptadores.mapeos.OrdenesMapper;
 import com.ecommerce.proyecto.adaptadores.puertos.input.DescuentosPuerto;
 import com.ecommerce.proyecto.adaptadores.puertos.input.OrdenesPuerto;
@@ -16,8 +15,6 @@ import com.ecommerce.proyecto.dominio.repositorios.ICarritoRepositorio;
 import com.ecommerce.proyecto.dominio.repositorios.IOrdenesRepositorio;
 import com.ecommerce.proyecto.dominio.repositorios.IUsuariosRepositorio;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -51,7 +48,7 @@ public class OrdenesCasosDeUso implements OrdenesPuerto {
             return ordenesRepo.guardarOrden(nuevaOrden).getReferencia();
 
         }catch (Exception e){
-            throw new RuntimeException(e.getCause());
+            throw new RuntimeException("Error al crear una orden: "+e.getMessage());
         }
     }
 
@@ -93,7 +90,7 @@ public class OrdenesCasosDeUso implements OrdenesPuerto {
 
             return response;
         }catch (Exception e){
-            throw new RuntimeException("error al guardar la orden, " + e.getMessage());
+            throw new RuntimeException("error al guardar la orden: " + e.getMessage());
         }
     }
 
@@ -110,7 +107,7 @@ public class OrdenesCasosDeUso implements OrdenesPuerto {
 
             return respuesta;
         }catch (Exception e){
-            throw new RuntimeException("Error al intentar cambiar al estado: "+dto.getEstado(),e);
+            throw new RuntimeException("Error al intentar cambiar al estado: "+dto.getEstado()+", "+e.getMessage());
         }
     }
 }

@@ -24,17 +24,26 @@ public class CategoriasAdaptador implements ICategoriasRepositorio {
             List<CategoriasJpa> categoriasNuevas = categoriasMapper.aEntidadLista(categorias);
             return categoriasMapper.aModeloLista(categoriasRepo.saveAll(categoriasNuevas));
         }catch (Exception e){
-            throw new RuntimeException("Error al guardar las categorias", e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
     public boolean eliminar(UUID idCategoria) {
         try {
-            categoriasRepo.deleteById(idCategoria);
+            categoriasRepo.delete(categoriasRepo.findById(idCategoria).orElseThrow());
             return true;
         }catch (Exception e){
             return false;
+        }
+    }
+
+    @Override
+    public List<Categorias> findByProducto(UUID idProducto) {
+        try {
+            return categoriasMapper.aModeloLista(categoriasRepo.findAllByProductoId(idProducto));
+        }catch (Exception e){
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

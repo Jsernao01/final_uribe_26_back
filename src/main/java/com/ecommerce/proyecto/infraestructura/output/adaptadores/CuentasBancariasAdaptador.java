@@ -24,7 +24,7 @@ public class CuentasBancariasAdaptador implements ICuentasBancariasRepositorio {
             List<CuentasBancariasJpa> cuentaNueva = cuentasBancariasMapper.aEntidadLista(cuenta);
             return cuentasBancariasMapper.aModeloLista(cuentasBancariasRepo.saveAll(cuentaNueva));
         }catch (Exception e){
-            throw new RuntimeException("Error al guardar una cuenta bancaria", e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -33,7 +33,7 @@ public class CuentasBancariasAdaptador implements ICuentasBancariasRepositorio {
         try{
             return cuentasBancariasMapper.aModelo(cuentasBancariasRepo.findById(idCuenta).orElseThrow());
         }catch (Exception e){
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -47,7 +47,7 @@ public class CuentasBancariasAdaptador implements ICuentasBancariasRepositorio {
 
             return cuentasBancariasMapper.aModelo(cuentasBancariasRepo.save(cuentaActualizada));
         }catch (Exception e){
-            throw new RuntimeException("error al actualizar la cuenta bancaria", e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 

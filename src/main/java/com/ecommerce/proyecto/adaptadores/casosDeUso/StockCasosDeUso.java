@@ -34,7 +34,7 @@ public class StockCasosDeUso implements StockPuerto {
             return stockMapper.deRespuestaStockList(stockAsignado);
 
         }catch (Exception e){
-            throw new RuntimeException("Error al guardar el stock", e.getCause());
+            throw new RuntimeException("Error al guardar el stock: "+ e.getMessage());
         }
     }
 
@@ -55,7 +55,7 @@ public class StockCasosDeUso implements StockPuerto {
 
             return stockMapper.deRespuestaStockList(stockRepo.guardar(stocks));
         }catch (Exception e){
-            throw new RuntimeException("Error al cambiar el stock de un producto", e.getCause());
+            throw new RuntimeException("Error al cambiar el stock de un producto: "+ e.getMessage());
         }
     }
 }
