@@ -64,7 +64,7 @@ public class UsuarioCasosDeUso implements UsuariosPuerto {
         try {
             return usuariosRepo.cambiarContrasena(contrasena);
         }catch (Exception e){
-            throw new RuntimeException("Error al actualizar la contraseña: "+e.getMessage());
+            throw new RuntimeException("Error al actualizar la contrasena: "+e.getMessage());
         }
     }
 
