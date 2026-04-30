@@ -29,8 +29,9 @@ public class ProductosControlador {
     }
 
     @GetMapping("/buscar")
-    public ResponseEntity<?> filtrarProductos(@RequestBody FiltrosProductosDto filtros){
+    public ResponseEntity<?> filtrarProductos(@RequestBody(required = false) FiltrosProductosDto filtros){
         try{
+            if (filtros == null) filtros = new FiltrosProductosDto();
             return ResponseEntity.ok(productosPuerto.filtrarProductos(filtros));
         }catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());

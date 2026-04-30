@@ -16,5 +16,6 @@ public interface UsuariosPuerto {
     UsuarioDto actualizarUsuario(ActualizarUsuarioDto usuario, UUID id);
     boolean actualizarContrasena(ActualizarContrasena actualizarContrasena);
     List<Usuarios> FiltrarUsuarios(FiltrosUsuariosDto filtrosUsuariosDto);
-
+    boolean eliminarUsuario(UUID id);
+    UsuarioDto obtenerPorId(UUID id);
 }
