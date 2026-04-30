@@ -2,10 +2,10 @@ spring:
   application:
     name: ecommerce
   datasource:
-    url: jdbc:postgresql://localhost:5432/ecommerce_db
+    url: jdbc:postgresql://dpg-d7pflh8g4nts73b05ksg-a:5432/ecommerce_db_x0jl
     driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: Jsernao01*
+    username: admin_ecommerce
+    password: HhW5MauwpuaQw3tc0hYWwUKH58i5RGet
   jpa:
     hibernate:
       ddl-auto: update
