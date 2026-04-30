@@ -11,4 +11,5 @@ import java.util.UUID;
 @Repository
 public interface IUsuariosJpaRepositorio extends JpaRepository<UsuariosJpa, UUID>, JpaSpecificationExecutor<UsuariosJpa> {
     Optional<UsuariosJpa> findById(UUID id);
+    Optional<UsuariosJpa> findByCorreoIgnoreCase(String correo);
 }

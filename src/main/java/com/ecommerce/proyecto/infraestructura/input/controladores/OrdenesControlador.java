@@ -43,4 +43,13 @@ public class OrdenesControlador {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping("/listar")
+    public ResponseEntity<?> listarOrdenes() {
+        try {
+            return ResponseEntity.ok(ordenesPuerto.listarOrdenes());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

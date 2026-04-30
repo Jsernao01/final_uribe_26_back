@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static com.ecommerce.proyecto.infraestructura.output.especificaciones.EspecificacionUsuario.crearEspecificacionUsuarios;
@@ -54,15 +55,12 @@ public class UsuariosAdaptador implements IUsuariosRepositorio {
     @Override
     public Boolean cambiarContrasena(ActualizarContrasena actualizarContrasena) {
         try {
-
-            UsuariosJpa usuarioExistente = usuariosRepo.findById(actualizarContrasena.id).orElseThrow();
+            UsuariosJpa usuarioExistente = usuariosRepo.findById(actualizarContrasena.id).orElseThrow();        
 
             if (codificarContrasena.matches(actualizarContrasena.contrasenaVieja, usuarioExistente.getContrasena())){
-
                 usuarioExistente.setContrasena(codificarContrasena.encode(actualizarContrasena.contrasenaNueva));
                 usuariosRepo.save(usuarioExistente);
                 return true;
-
             }
             return false;
         }catch (Exception e){
@@ -72,17 +70,33 @@ public class UsuariosAdaptador implements IUsuariosRepositorio {
 
     @Override
     public Usuarios findById(UUID idUsuario) {
-        return usuariosMapper.aModelo(usuariosRepo.findById(idUsuario).orElseThrow());
+        return usuariosMapper.aModelo(usuariosRepo.findById(idUsuario).orElseThrow(() -> new RuntimeException("Usuario no encontrado")));
+    }
+
+    @Override
+    public Optional<Usuarios> buscarPorCorreo(String correo) {
+        return usuariosRepo.findByCorreoIgnoreCase(correo).map(usuariosMapper::aModelo);
     }
 
     @Override
     public List<Usuarios> FiltrarUsuarios(FiltrosUsuariosDto filtros) {
         try {
-            return usuariosMapper.aModeloLista(usuariosRepo.findAll(crearEspecificacionUsuarios(filtros)));
+            return usuariosMapper.aModeloLista(usuariosRepo.findAll(crearEspecificacionUsuarios(filtros)));     
         }catch (Exception e){
             throw new RuntimeException(e.getMessage());
         }
     }
 
-
+    @Override
+    public boolean eliminar(UUID id) {
+        try {
+            if (usuariosRepo.existsById(id)) {
+                usuariosRepo.deleteById(id);
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            throw new RuntimeException("Error al eliminar: " + e.getMessage());
+        }
+    }
 }

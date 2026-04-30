@@ -20,8 +20,8 @@ public class UsuariosControlador {
 
     private final UsuariosPuerto usuariosPuerto;
 
-    @PostMapping("/guardar/{rol}")
-    public ResponseEntity<?> guardarUsuario(@RequestBody GuardarUsuarioDto dto, @PathVariable("rol") String rol){
+    @PostMapping("/admin/crear/{rol}")
+    public ResponseEntity<?> crearUsuario(@RequestBody GuardarUsuarioDto dto, @PathVariable("rol") String rol){
         try{
             return ResponseEntity.ok(usuariosPuerto.guardarUsuario(dto, rol));
         }catch (Exception e){
@@ -29,7 +29,7 @@ public class UsuariosControlador {
         }
     }
 
-    @PutMapping("/actualizar/{id}")
+    @PutMapping("/admin/actualizar/{id}")
     public ResponseEntity<?> actualizarUsuario(@RequestBody ActualizarUsuarioDto dto, @PathVariable("id") UUID id){
         try {
             return ResponseEntity.ok(usuariosPuerto.actualizarUsuario(dto, id));
@@ -38,22 +38,40 @@ public class UsuariosControlador {
         }
     }
 
-    @PutMapping("/actualizarContrasena")
-    public ResponseEntity<?> actualizarUsuario(@RequestBody ActualizarContrasena dto){
+    @PutMapping("/perfil/cambiar-contrasena")
+    public ResponseEntity<?> actualizarContrasena(@RequestBody ActualizarContrasena dto){
         try {
             return ResponseEntity.ok(usuariosPuerto.actualizarContrasena(dto));
         }catch (Exception e){
-            return ResponseEntity.badRequest().body(e.getCause());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    @GetMapping("/listar")
-    public ResponseEntity<?> listarPorFiltros(@RequestBody FiltrosUsuariosDto filtros){
+    @GetMapping("/admin/listar")
+    public ResponseEntity<?> listarUsuarios(@RequestBody(required = false) FiltrosUsuariosDto filtros){
         try {
+            if (filtros == null) filtros = new FiltrosUsuariosDto();
             return ResponseEntity.ok(usuariosPuerto.FiltrarUsuarios(filtros));
         }catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
+    @GetMapping("/admin/{id}")
+    public ResponseEntity<?> obtenerUsuario(@PathVariable("id") UUID id){
+        try {
+            return ResponseEntity.ok(usuariosPuerto.obtenerPorId(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/admin/eliminar/{id}")
+    public ResponseEntity<?> eliminarUsuario(@PathVariable("id") UUID id){
+        try {
+            return ResponseEntity.ok(usuariosPuerto.eliminarUsuario(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

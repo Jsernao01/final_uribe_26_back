@@ -38,23 +38,12 @@ public class UsuarioCasosDeUso implements UsuariosPuerto {
             usuarioNoAsignado.setContrasena(contrasena);
             Usuarios nuevoUsuario = usuariosRepo.guardar(usuarioNoAsignado);
 
-
             List<CuentaBancariaDto> cuentasBancarias = cuentasBancariasPuerto.guardarCuentasBancarias(usuario.getCuentasBancarias(), nuevoUsuario.getId());
 
-            return UsuarioDto.builder()
-                    .id(nuevoUsuario.getId())
-                    .nombres(nuevoUsuario.getNombres())
-                    .apellidos(nuevoUsuario.getApellidos())
-                    .tipoDocumento(nuevoUsuario.getTipoDocumento().getDescripcion())
-                    .documento(nuevoUsuario.getDocumento())
-                    .correo(nuevoUsuario.getCorreo())
-                    .telefono(nuevoUsuario.getTelefono())
-                    .nacimiento(nuevoUsuario.getNacimiento())
-                    .fechaRegistro(nuevoUsuario.getFechaRegistro())
-                    .direccion(nuevoUsuario.getDireccion())
-                    .contrasena(contrasena)
-                    .cuentasBancarias(cuentasBancarias)
-                    .build();
+            UsuarioDto response = usuariosMapper.deResponseUsuario(nuevoUsuario);
+            response.setContrasena(contrasena);
+            response.setCuentasBancarias(cuentasBancarias);
+            return response;
         }catch (Exception e){
             throw new RuntimeException("Error al guardar un usuario: "+e.getMessage());
         }
@@ -75,7 +64,7 @@ public class UsuarioCasosDeUso implements UsuariosPuerto {
         try {
             return usuariosRepo.cambiarContrasena(contrasena);
         }catch (Exception e){
-            throw new RuntimeException("Error al actualizar la contraseÃ±a: "+e.getMessage());
+            throw new RuntimeException("Error al actualizar la contraseña: "+e.getMessage());
         }
     }
 
@@ -85,6 +74,25 @@ public class UsuarioCasosDeUso implements UsuariosPuerto {
             return usuariosRepo.FiltrarUsuarios(filtros);
         }catch (Exception e){
             throw new RuntimeException("Error al filtrar los usuarios: "+ e.getMessage());
+        }
+    }
+
+    @Override
+    public boolean eliminarUsuario(UUID id) {
+        try {
+            return usuariosRepo.eliminar(id);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al eliminar el usuario: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public UsuarioDto obtenerPorId(UUID id) {
+        try {
+            Usuarios usuario = usuariosRepo.findById(id);
+            return usuariosMapper.deResponseUsuario(usuario);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al obtener el usuario: " + e.getMessage());
         }
     }
 }
