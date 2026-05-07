@@ -13,10 +13,14 @@ import java.util.List;
 public interface CategoriasMapper {
 
     default Categorias deString(String caracteristica) {
-        Caracteristicas valor = Caracteristicas.valueOf(caracteristica.toUpperCase());
-
         Categorias categoria = new Categorias();
-        categoria.setCaracteristica(valor);
+        try {
+            Caracteristicas valor = Caracteristicas.valueOf(caracteristica.toUpperCase().trim());
+            categoria.setCaracteristica(valor);
+        } catch (Exception e) {
+            // Si no coincide con el Enum, asignamos GENERAL por defecto para evitar error 400
+            categoria.setCaracteristica(Caracteristicas.GENERAL);
+        }
 
         return categoria;
     }

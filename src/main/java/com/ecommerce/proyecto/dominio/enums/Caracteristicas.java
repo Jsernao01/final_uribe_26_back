@@ -9,7 +9,11 @@ public enum Caracteristicas {
     CHAQUETA("chaqueta"),
     JEAN("jean"),
     COUNTRY("country"),
-    VINTAGE("vintage");
+    VINTAGE("vintage"),
+    MASCULINO("masculino"),
+    FEMENINO("femenino"),
+    UNISEX("unisex"),
+    GENERAL("general");
 
     private final String descripcion;
 

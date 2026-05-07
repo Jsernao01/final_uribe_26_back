@@ -9,6 +9,7 @@ import com.ecommerce.proyecto.dominio.repositorios.ICategoriasRepositorio;
 import com.ecommerce.proyecto.dominio.repositorios.IProductosRepositorio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,6 +23,7 @@ public class CategoriasCasosDeUso implements CategoriasPuerto {
     private final IProductosRepositorio productosRepo;
 
     @Override
+    @Transactional
     public List<CategoriaDto> guardarCategoria(GuardarCategoriaDto dto) {
      try {
          List<Categorias> categorias = categoriasMapper.deStringList(dto.getCaracteristicas());

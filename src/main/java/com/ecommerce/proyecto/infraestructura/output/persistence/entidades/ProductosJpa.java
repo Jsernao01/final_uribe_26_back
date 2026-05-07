@@ -34,13 +34,13 @@ public class ProductosJpa {
     @Column(nullable = false)
     private Boolean activo;
 
-    @OneToMany(mappedBy = "producto")
+    @OneToMany(mappedBy = "producto", fetch = FetchType.EAGER)
     private  List<CategoriasJpa> categorias;
 
-    @OneToMany(mappedBy = "producto")
+    @OneToMany(mappedBy = "producto", fetch = FetchType.EAGER)
     private List<StockJpa> stocks;
 
 
-    @OneToMany(mappedBy = "producto")
+    @OneToMany(mappedBy = "producto", fetch = FetchType.EAGER)
     private List<DescuentosJpa> descuento;
 }

@@ -20,9 +20,8 @@ public class CategoriasJpa {
     @Column(columnDefinition = "UUID")
     private UUID id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false,name = "caracteristica")
-    private Caracteristicas caracteristica;
+    @Column(nullable = false, name = "caracteristica")
+    private String caracteristica;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_producto")

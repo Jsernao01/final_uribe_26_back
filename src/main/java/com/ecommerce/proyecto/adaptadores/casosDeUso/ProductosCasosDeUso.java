@@ -20,6 +20,7 @@ import com.ecommerce.proyecto.dominio.repositorios.IProductosRepositorio;
 import com.ecommerce.proyecto.dominio.repositorios.IStockRepositorio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -83,6 +84,7 @@ public class ProductosCasosDeUso implements ProductosPuerto {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ProductosDto> filtrarProductos(FiltrosProductosDto filtros) {
         try {
             List<ProductosDto> response = productosMapper.deResponseProductoList(productosRepo.filtrarProductos(filtros));
